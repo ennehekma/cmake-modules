@@ -529,7 +529,7 @@ else()
   # The user has not requested an exact version.  Among known
   # versions, find those that are acceptable to the user request.
   set(_Boost_KNOWN_VERSIONS ${Boost_ADDITIONAL_VERSIONS}
-    "1.56.0" "1.56" "1.55.0" "1.55" "1.54.0" "1.54"
+    "1.56.0" "1.56" "1.55.0" "1.55" "1.54.0" "1.54" "1.63.0" "1.63"
     "1.53.0" "1.53" "1.52.0" "1.52" "1.51.0" "1.51"
     "1.50.0" "1.50" "1.49.0" "1.49" "1.48.0" "1.48" "1.47.0" "1.47" "1.46.1"
     "1.46.0" "1.46" "1.45.0" "1.45" "1.44.0" "1.44" "1.43.0" "1.43" "1.42.0" "1.42"
@@ -556,6 +556,7 @@ else()
   endif()
 endif()
 
+set(Boost_USE_STATIC_LIBS TRUE)
 # The reason that we failed to find Boost. This will be set to a
 # user-friendly message when we fail to find some necessary piece of
 # Boost.
@@ -605,6 +606,10 @@ set(Boost_ERROR_REASON)
     "$ENV{ProgramFiles}/boost/include"
     "$ENV{ProgramFiles}/boost"
     /sw/local/include
+    /usr/local/boost_1_63_0/
+    /usr/local/boost_1_63_0/
+    "/usr/local/boost_1_63_0"
+    "/usr/local/boost_1_63_0/"
     "${PROJECT_SOURCE_DIR}/../boost"
     "${PROJECT_SOURCE_DIR}/../../boost"
     "${PROJECT_SOURCE_DIR}/../../../boost"
@@ -1211,6 +1216,15 @@ set(Boost_ERROR_REASON)
         endif()
       endif()
     endif()
+  endif()
+
+   if (Boost_FOUND)
+    message("Boost ${Boost_FIND_VERSION} found Enne.")
+    if (Boost_FIND_COMPONENTS)
+      message("Found Boost components:")
+      message("   ${Boost_FIND_COMPONENTS}")
+    endif()
+    return()
   endif()
 
   # show the Boost_INCLUDE_DIRS AND Boost_LIBRARIES variables only in the advanced view
